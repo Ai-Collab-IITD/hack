@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEM AI Hackathon 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Navigation */
+        nav {
+            background: #2c3e50;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+        }
+
+        nav a:hover {
+            color: #3498db;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+            min-width: 300px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .register-btn {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            background: #f8f9fa;
+        }
+
+        .event-schedule-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 2.5rem 2rem;
+            width: 300px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .event-schedule-box:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .calendar-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            display: block;
+            opacity: 0.9;
+        }
+
+        .event-schedule-box h3 {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .schedule-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        .schedule-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .schedule-item strong {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .schedule-item span {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Theme Boxes */
+        .theme-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Force 4 in one row */
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .theme-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .theme-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+        .theme-box {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .theme-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-color: #667eea;
+        }
+
+        .theme-box h3 {
+            color: #667eea;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Key Dates */
+        .dates-list {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .date-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 1.1rem;
+        }
+
+        .date-item:last-child {
+            border-bottom: none;
+        }
+
+        .date-item strong {
+            color: #667eea;
+        }
+
+        /* Prize Section */
+        .prize-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .prize-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .prize-box h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .prize-box .amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Sponsor Section */
+        #sponsors {
+            background: #f8f9fa;
+        }
+
+        .sponsor-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .sponsor-box {
+            width: 200px;
+            height: 200px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem;
+        }
+
+        .sponsor-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-member {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .team-member .photo {
+            width: 120px;
+            height: 120px;
+            background: #e0e0e0;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+
+        .team-member h4 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Introduction Section */
+        .intro-section {
+            background: white;
+            padding: 4rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .intro-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .intro-content p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #444;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .intro-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight-text {
+            background: linear-gradient(135deg, #f6f8fb 0%, #e9ecef 100%);
+            padding: 1.5rem;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            font-size: 1.15rem;
+            color: #2c3e50;
+        }
+
+        .highlight-text strong {
+            color: #667eea;
+        }
+                /* Timeline Section */
+        #timeline {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .timeline-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-marker {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+            margin-left: calc(50% - 30px);
+        }
+
+        .timeline-item.completed .timeline-marker {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        .timeline-item.current .timeline-marker {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            animation: bounce 2s infinite;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .timeline-item.upcoming .timeline-marker {
+            background: #e9ecef;
+            color: #999;
+        }
+
+        .pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(102, 126, 234, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.3);
+                opacity: 0;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            margin-left: calc(-50% - 30px);
+            max-width: 400px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 0;
+            margin-right: calc(-50% - 30px);
+        }
+
+        .timeline-content h3 {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item.current .timeline-content {
+            border: 2px solid #667eea;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .timeline-content p {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .timeline-date {
+            display: inline-block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+        }
+
+        .timeline-item.completed .timeline-date {
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .timeline-item.upcoming .timeline-date {
+            color: #999;
+            background: rgba(0, 0, 0, 0.05);
+        }
+        /* =========================
+   Mobile Timeline Fix
+   ========================= */
+@media (max-width: 768px) {
+
+    .timeline-container {
+        padding-left: 2rem;
+    }
+
+    /* Move the vertical line to the left */
+    .timeline-container::before {
+        left: 30px;
+        transform: none;
+    }
+
+    .timeline-item {
+        flex-direction: column;
+        margin-left: 0;
+    }
+
+    /* Marker aligned to the left */
+    .timeline-marker {
+        margin-left: 0;
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: none;
+    }
+
+    /* Disable bouncing overlap issues */
+    .timeline-item.current .timeline-marker {
+        animation: none;
+    }
+
+    /* Card becomes full-width */
+    .timeline-content {
+        margin: 0;
+        max-width: 100%;
+        margin-left: 3.5rem;
+    }
+
+    /* Disable alternating layout */
+    .timeline-item:nth-child(even) .timeline-content {
+        margin-right: 0;
+        margin-left: 3.5rem;
+    }
+
+    /* Improve readability */
+    .timeline-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .timeline-content p {
+        font-size: 0.95rem;
+    }
+
+    .timeline-date {
+        font-size: 0.85rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#themes">Themes</a></li>
+            <li><a href="#dates">Key Dates</a></li>
+            <li><a href="#timeline">Timeline</a></li>
+            <li><a href="#prizes">Prizes</a></li>
+            <li><a href="#sponsors">Sponsors</a></li>
+            <li><a href="#team">Team</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <div id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to the AI Collab Hack</h1>
+            <p class="hero-subtitle">Collaboration is key to success in any environment. In learning sphere, collaborative learning can not only speed up the learning process but also give wings to innovation.</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdC3YNNPTZhZIDdCGG6vPKqEo5Dc-COkoK_nAma19H1idYIvA/viewform?usp=dialog" target="_blank" class="register-btn">Register Now</a>
+        </div>
+        <div class="event-schedule-box" onclick="document.getElementById('dates').scrollIntoView({behavior: 'smooth'})">
+            <svg class="calendar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <h3>Event Schedule</h3>
+            <div class="schedule-item">
+                <strong>Pre-Registration Opens</strong>
+                <span>January 15, 2026</span>
+            </div>
+            <div class="schedule-item">
+                <strong>Hackathon</strong>
+                <span>February 27-28, 2026</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Introduction Section -->
+    <section class="intro-section">
+        <div class="intro-content">
+            <p>With the rise of LLMs, AI has made significant strides in last few years. AI can assist significantly in collaborative learning sphere. While there may be two ways of broadly using AI for collaboration in teaching and learning, i.e., (i) Human in the AI-loop and (ii) Autonomous AI, we focus on the first one for the current Hackathon (and project).</p>
+            
+            <p class="highlight-text">Within Human in the AI-loop context, we want hackers to think: <strong>How can AI agents act either as a learning partner or as a smart support system to make learning more inclusive and effective?</strong></p>
+            
+            <p>Hackers may develop creative AI-artifacts in response to the grand challenges mentioned below. Each grand challenge is supported by a sample description. The sample descriptions for these grand challenges are developed by the students of IIT Delhi in a pre-Hackathon workshop organised in collaboration with Imperial College London and Microsoft Garage.</p>
+            
+            <p>The Hackathon teams may select one of these grand challenges, and choose to either develop an AI-prototype in alignment with the sample description, or further adapt and modify the description as per your skills, context, and interests.</p>
+        </div>
+    </section>
+
+    <!-- Themes Section -->
+    <section id="themes">
+        <h2>Themes</h2>
+        <div class="theme-grid">
+            <div class="theme-box" onclick="window.open('theme1_page.html', '_blank')">
+                <h3>AI agents for collaborative content creation and knowledge curation</h3>
+            </div>
+            <div class="theme-box" onclick="window.open('theme2_page.html', '_blank')">
+                <h3>Leveraging AI Agents to Connect Learners with Learners</h3>
+            </div>
+            <div class="theme-box" onclick="window.open('theme4_page.html', '_blank')">
+                <h3>AI Agents for Multilingual and Accessibility Support in India</h3>
+            </div>
+            <div class="theme-box" onclick="window.open('theme5_page.html', '_blank')">
+                <h3>AI-Powered Peer Feedback Coach for STEM Outputs</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Dates Section -->
+    <section id="dates">
+        <h2>Key Dates</h2>
+        <div class="dates-list">
+            <div class="date-item">
+                <span><strong>Registration Opens</strong></span>
+                <span>January 15, 2026</span>
+            </div>
+            <div class="date-item">
+                <span><strong>Registrations Closes</strong></span>
+                <span>January 26, 2026</span>
+            </div>
+            <div class="date-item">
+                <span><strong>Orientation + Expert Talk 1</strong></span>
+                <span>February 4, 2026</span>
+            </div>
+            <div class="date-item">
+                <span><strong>Expert Talk 2</strong></span>
+                <span>February 11, 2026</span>
+            </div>
+            <div class="date-item">
+                <span><strong>Hackathon</strong></span>
+                <span>February 27-28, 2026</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline">
+        <h2>Project Timeline</h2>
+        <p class="timeline-subtitle">This hackathon is part of a wider research project exploring AI in collaborative learning</p>
+        <div class="timeline-container">
+            <div class="timeline-item completed">
+                <div class="timeline-marker">✓</div>
+                <div class="timeline-content">
+                    <h3>Phase 1: Project Initiation</h3>
+                    <p>Research planning and framework development</p>
+                    <span class="timeline-date">Completed</span>
+                </div>
+            </div>
+            <div class="timeline-item completed">
+                <div class="timeline-marker">✓</div>
+                <div class="timeline-content">
+                    <h3>Phase 2: Pre-Hack Workshop</h3>
+                    <p>Workshop with IIT Delhi, Imperial College London, and Microsoft Garage</p>
+                    <span class="timeline-date">Completed</span>
+                </div>
+            </div>
+            <div class="timeline-item current">
+                <div class="timeline-marker">
+                    <span class="pulse"></span>
+                    🚀
+                </div>
+                <div class="timeline-content">
+                    <h3>Phase 3: Hackathon</h3>
+                    <p>Teams develop AI-prototypes for collaborative learning challenges</p>
+                    <span class="timeline-date">February 27-28, 2026 • Current Phase</span>
+                </div>
+            </div>
+                        <div class="timeline-item upcoming">
+                <div class="timeline-marker">⏳</div>
+                <div class="timeline-content">
+                    <h3>Phase 4: Post hackathon discussion</h3>
+                    <p>Discussion with the participating students to understand the dimensions of collaborative learning using AI tools during the hackathon.</p>
+                    <span class="timeline-date">Upcoming</span>
+                </div>
+            </div>
+            <div class="timeline-item upcoming">
+                <div class="timeline-marker">⏳</div>
+                <div class="timeline-content">
+                    <h3>Phase 5: Case Study Development</h3>
+                    <p>Documentation and research analysis of hackathon outcomes</p>
+                    <span class="timeline-date">Upcoming</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Prizes Section -->
+    <section id="prizes">
+        <h2>Prizes</h2>
+        <div class="prize-grid">
+            <div class="prize-box">
+                <h3>🥇 First Place</h3>
+                <div class="amount">₹50,000</div>
+                <p>+ Mentorship opportunities</p>
+            </div>
+            <div class="prize-box">
+                <h3>🥈 Second Place</h3>
+                <div class="amount">₹30,000</div>
+                <p>+ Certificate of Excellence</p>
+            </div>
+            <div class="prize-box">
+                <h3>🥉 Third Place</h3>
+                <div class="amount">₹20,000</div>
+                <p>+ Recognition & Swag</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sponsors Section -->
+    <section id="sponsors">
+        <h2>Sponsors</h2>
+        <div class="sponsor-grid">
+            <div class="sponsor-box">
+                <img src="msft.png" alt="Sponsor 1" onerror="this.parentElement.innerHTML='<div style=\'color:#999\'>Sponsor Logo 1</div>'">
+            </div>
+            <div class="sponsor-box">
+                <img src="icl.png" alt="Sponsor 2" onerror="this.parentElement.innerHTML='<div style=\'color:#999\'>Sponsor Logo 2</div>'">
+            </div>
+            <div class="sponsor-box">
+                <img src="iitd.png" alt="Sponsor 3" onerror="this.parentElement.innerHTML='<div style=\'color:#999\'>Sponsor Logo 3</div>'">
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team">
+        <h2>Team</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="photo">Photo</div>
+                <h4>Team Member Name</h4>
+                <p>Role / Position</p>
+            </div>
+            <div class="team-member">
+                <div class="photo">Photo</div>
+                <h4>Team Member Name</h4>
+                <p>Role / Position</p>
+            </div>
+            <div class="team-member">
+                <div class="photo">Photo</div>
+                <h4>Team Member Name</h4>
+                <p>Role / Position</p>
+            </div>
+            <div class="team-member">
+                <div class="photo">Photo</div>
+                <h4>Team Member Name</h4>
+                <p>Role / Position</p>
+            </div>
+            <div class="team-member">
+                <div class="photo">Photo</div>
+                <h4>Team Member Name</h4>
+                <p>Role / Position</p>
+            </div>
+            <div class="team-member">
+                <div class="photo">Photo</div>
+                <h4>Team Member Name</h4>
+                <p>Role / Position</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

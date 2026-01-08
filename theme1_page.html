@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme 1 - AI for Collaborative Assessment in STEM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        /* Navigation Bar */
+        .nav-bar {
+            background: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-title {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .back-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            border: 2px solid white;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            background: white;
+            color: #2c3e50;
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .theme-label {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .header-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1100px;
+            margin: -3rem auto 0;
+            padding: 0 2rem 4rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Description Card */
+        .description-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .description-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px 0 0 15px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 40px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        .description-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #555;
+            text-align: justify;
+        }
+
+        /* Key Focus Areas */
+        .focus-areas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0 3rem;
+        }
+
+        .focus-card {
+            background: linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid #e0e6ed;
+            transition: all 0.3s;
+        }
+
+        .focus-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+            border-color: #667eea;
+        }
+
+        .focus-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .focus-card h3 {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .focus-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Developers Section */
+        .developers-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 4rem;
+        }
+
+        .developers-section h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .developers-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+            font-size: 1.05rem;
+        }
+
+        .developers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .developer-card {
+            background: linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .developer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .developer-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .developer-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+
+        .developer-photo {
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .developer-card h3 {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .developer-role {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .developer-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Enrolled Teams Section */
+        .enrolled-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .enrolled-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .enrolled-header h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-count {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+
+        .teams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .teams-grid {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+
+    .team-card {
+        width: 100%;
+        max-width: 320px;
+        padding: 1.5rem;
+    }
+}
+
+
+
+        .team-card {
+            background: linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%);
+            border: 2px solid #e0e6ed;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+            border-color: #667eea;
+        }
+
+        .team-card h3 {
+            color: #667eea;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .team-card h3::before {
+            content: '👥';
+            font-size: 1.2rem;
+        }
+
+        .member-list {
+            list-style: none;
+        }
+
+        .member-item {
+            padding: 0.8rem;
+            margin-bottom: 0.5rem;
+            background: white;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .member-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .no-teams {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c33;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .description-card, .developers-section, .enrolled-section {
+                padding: 2rem;
+            }
+
+            .nav-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav-bar">
+        <div class="nav-content">
+            <div class="nav-title">STEM AI Hackathon 2026</div>
+            <a href="javascript:window.close()" class="back-link">← Back to Main</a>
+        </div>
+    </div>
+
+<!-- Header -->
+<div class="header">
+    <div class="header-content">
+        <span class="theme-label">GRAND CHALLENGE 1</span>
+        <h1>AI Agents for Collaborative Content Creation and Knowledge Curation</h1>
+        <p class="header-subtitle">
+            Leveraging AI agents to support collaborative knowledge building, content generation, and multimodal curation workflows
+        </p>
+    </div>
+</div>
+
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Description Card -->
+        <div class="description-card">
+<h2 class="section-title">Challenge Overview</h2>
+
+<p class="description-text">
+    <strong>AI agents for collaborative content creation and knowledge curation</strong>
+</p>
+
+<p class="description-text">
+    This hackathon case centres on leveraging the power of AI agents for content generation and knowledge curation in a collaborative environment.
+    AI agent can act as starting coach for knowledge curation topics, doing the task assignment to participants,
+    providing tools for exploring more data on topics.
+</p>
+
+<p class="description-text">
+    This AI agent can also expose tools converting information from textual to image formats
+    (e.g. tools like SORA, Microsoft Designer could be leveraged).
+    Not everything has to be developed from scratch – rather rely upon prior tools to stitch together
+    in a flow to enable easy content creation.
+</p>
+
+<p class="description-text">
+    Such a tool could have usage in writing papers, completing assignments, generating social media content etc.
+</p>
+
+<p class="description-text">
+    <strong>Sample description by:</strong> Team Members
+    (<a href="#" target="_blank">for website: hyperlink</a>)
+</p>
+
+
+        <!-- Developers Section -->
+        <div class="developers-section">
+            <h2>Theme Developers</h2>
+            <p class="developers-subtitle">Meet the experts guiding this theme</p>
+            
+            <div class="developers-grid">
+                <div class="developer-card">
+                    <div class="developer-photo">Add Photo</div>
+                    <h3>Developer Name</h3>
+                    <div class="developer-role">Role / Position</div>
+                    <p>Add information and details about the developer's expertise and background here</p>
+                </div>
+                <div class="developer-card">
+                    <div class="developer-photo">Add Photo</div>
+                    <h3>Developer Name</h3>
+                    <div class="developer-role">Role / Position</div>
+                    <p>Add information and details about the developer's expertise and background here</p>
+                </div>
+                <div class="developer-card">
+                    <div class="developer-photo">Add Photo</div>
+                    <h3>Developer Name</h3>
+                    <div class="developer-role">Role / Position</div>
+                    <p>Add information and details about the developer's expertise and background here</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enrolled Teams Section -->
+        <div class="enrolled-section">
+            <div class="enrolled-header">
+                <h2>Enrolled Teams</h2>
+                <div class="team-count" id="teamCount">Loading...</div>
+            </div>
+            
+            <div id="teamsContainer" class="loading">
+                Loading enrolled teams...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // IMPORTANT: Replace this URL with your Google Apps Script Web App URL
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwimJR822Vm57eMb3-Awm_2OU1OwjDrtC6SI2lLNo7kQ1YGI7PSxzQaINaPnKPKzcQj/exec';
+        const THEME_NUMBER = '1'; // This is Theme 1
+
+        async function loadEnrolledTeams() {
+            try {
+                const response = await fetch(`${SCRIPT_URL}?theme=${THEME_NUMBER}`);
+                const data = await response.json();
+                
+                if (data.error) {
+                    displayError(data.error);
+                    return;
+                }
+                
+                displayTeams(data);
+            } catch (error) {
+                console.error('Error loading teams:', error);
+                displayError('Failed to load enrolled teams. Please try again later.');
+            }
+        }
+
+        function displayTeams(data) {
+            const countElement = document.getElementById('teamCount');
+            const containerElement = document.getElementById('teamsContainer');
+            
+            countElement.textContent = `${data.totalTeams} ${data.totalTeams === 1 ? 'Team' : 'Teams'} Enrolled`;
+            
+            if (data.totalTeams === 0) {
+                containerElement.innerHTML = '<div class="no-teams">No teams have enrolled in this theme yet. Be the first!</div>';
+                return;
+            }
+            
+            const teamsHTML = data.teams.map(team => `
+                <div class="team-card">
+                    <h3>${team.teamName}</h3>
+                    <ul class="member-list">
+                        ${team.member1 ? `<li class="member-item">${team.member1}</li>` : ''}
+                        ${team.member2 ? `<li class="member-item">${team.member2}</li>` : ''}
+                        ${team.member3 ? `<li class="member-item">${team.member3}</li>` : ''}
+                    </ul>
+                </div>
+            `).join('');
+            
+            containerElement.innerHTML = `<div class="teams-grid">${teamsHTML}</div>`;
+        }
+
+        function displayError(message) {
+            const containerElement = document.getElementById('teamsContainer');
+            containerElement.innerHTML = `<div class="error-message">${message}</div>`;
+        }
+
+        // Load teams when page loads
+        loadEnrolledTeams();
+
+        // Refresh every 30 seconds to show new enrollments
+        setInterval(loadEnrolledTeams, 30000);
+    </script>
+</body>
+</html>
