@@ -19,7 +19,6 @@
             min-height: 100vh;
         }
 
-        /* Navigation Bar */
         .nav-bar {
             background: rgba(44, 62, 80, 0.95);
             backdrop-filter: blur(10px);
@@ -59,9 +58,8 @@
             color: #2c3e50;
         }
 
-        /* Header Section */
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 5rem 2rem;
             position: relative;
@@ -71,11 +69,8 @@
         .header::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            inset: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.12)"/></svg>');
             opacity: 0.3;
         }
 
@@ -109,7 +104,6 @@
             max-width: 800px;
         }
 
-        /* Main Container */
         .container {
             max-width: 1100px;
             margin: -3rem auto 0;
@@ -118,7 +112,6 @@
             z-index: 10;
         }
 
-        /* Description Card */
         .description-card {
             background: white;
             padding: 3rem;
@@ -135,7 +128,7 @@
             left: 0;
             width: 5px;
             height: 100%;
-            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(180deg, #43cea2 0%, #185a9d 100%);
             border-radius: 15px 0 0 15px;
         }
 
@@ -152,7 +145,7 @@
             content: '';
             width: 40px;
             height: 4px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
             border-radius: 2px;
         }
 
@@ -163,7 +156,6 @@
             text-align: justify;
         }
 
-        /* Key Focus Areas */
         .focus-areas {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -181,14 +173,14 @@
 
         .focus-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
-            border-color: #667eea;
+            box-shadow: 0 8px 25px rgba(67, 206, 162, 0.2);
+            border-color: #43cea2;
         }
 
         .focus-icon {
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -209,7 +201,6 @@
             line-height: 1.6;
         }
 
-        /* Developers Section */
         .developers-section {
             background: white;
             padding: 3rem;
@@ -245,36 +236,18 @@
             text-align: center;
             transition: all 0.3s;
             border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .developer-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            transform: scaleX(0);
-            transition: transform 0.3s;
-        }
-
-        .developer-card:hover::before {
-            transform: scaleX(1);
         }
 
         .developer-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
-            border-color: #667eea;
+            box-shadow: 0 15px 40px rgba(67, 206, 162, 0.25);
+            border-color: #43cea2;
         }
 
         .developer-photo {
             width: 140px;
             height: 140px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
             border-radius: 50%;
             margin: 0 auto 1.5rem;
             display: flex;
@@ -284,7 +257,6 @@
             font-size: 0.9rem;
             font-weight: 500;
             border: 4px solid white;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
         }
 
         .developer-card h3 {
@@ -294,7 +266,7 @@
         }
 
         .developer-role {
-            color: #667eea;
+            color: #43cea2;
             font-weight: 600;
             font-size: 0.95rem;
             margin-bottom: 1rem;
@@ -306,7 +278,6 @@
             line-height: 1.6;
         }
 
-        /* Enrolled Teams Section */
         .enrolled-section {
             background: white;
             padding: 3rem;
@@ -327,7 +298,7 @@
 
         .team-count {
             display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
             color: white;
             padding: 0.8rem 2rem;
             border-radius: 25px;
@@ -342,7 +313,7 @@
             color: #666;
         }
 
-        .teams-grid {
+                .teams-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
@@ -361,8 +332,6 @@
     }
 }
 
-
-
         .team-card {
             background: linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%);
             border: 2px solid #e0e6ed;
@@ -373,12 +342,12 @@
 
         .team-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
-            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(67, 206, 162, 0.2);
+            border-color: #43cea2;
         }
 
         .team-card h3 {
-            color: #667eea;
+            color: #43cea2;
             font-size: 1.4rem;
             margin-bottom: 1.5rem;
             display: flex;
@@ -400,7 +369,7 @@
             margin-bottom: 0.5rem;
             background: white;
             border-radius: 8px;
-            border-left: 3px solid #667eea;
+            border-left: 3px solid #43cea2;
             color: #555;
             font-size: 1rem;
         }
@@ -424,25 +393,21 @@
             text-align: center;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2rem;
             }
-
-            .description-card, .developers-section, .enrolled-section {
+            .description-card,
+            .developers-section,
+            .enrolled-section {
                 padding: 2rem;
-            }
-
-            .nav-content {
-                flex-direction: column;
-                gap: 1rem;
             }
         }
     </style>
+
 </head>
 <body>
-    <!-- Navigation -->
+
     <div class="nav-bar">
         <div class="nav-content">
             <div class="nav-title">STEM AI Hackathon 2026</div>
@@ -450,9 +415,8 @@
         </div>
     </div>
 
-<!-- Header -->
-<div class="header">
-    <div class="header-content">
+    <div class="header">
+<div class="header-content">
         <span class="theme-label">GRAND CHALLENGE 1</span>
         <h1>AI Agents for Collaborative Content Creation and Knowledge Curation</h1>
         <p class="header-subtitle">
@@ -462,12 +426,9 @@
 </div>
 
 
-    <!-- Main Content -->
     <div class="container">
-        <!-- Description Card -->
         <div class="description-card">
-<h2 class="section-title">Challenge Overview</h2>
-
+            <h2 class="section-title">Challenge Overview</h2>
 <p class="description-text">
     <strong>AI agents for collaborative content creation and knowledge curation</strong>
 </p>
@@ -494,12 +455,12 @@
     (<a href="#" target="_blank">for website: hyperlink</a>)
 </p>
 
+        </div>
 
-        <!-- Developers Section -->
         <div class="developers-section">
             <h2>Theme Developers</h2>
             <p class="developers-subtitle">Meet the experts guiding this theme</p>
-            
+
             <div class="developers-grid">
                 <div class="developer-card">
                     <div class="developer-photo">Add Photo</div>
@@ -513,16 +474,9 @@
                     <div class="developer-role">Role / Position</div>
                     <p>Add information and details about the developer's expertise and background here</p>
                 </div>
-                <div class="developer-card">
-                    <div class="developer-photo">Add Photo</div>
-                    <h3>Developer Name</h3>
-                    <div class="developer-role">Role / Position</div>
-                    <p>Add information and details about the developer's expertise and background here</p>
-                </div>
             </div>
         </div>
 
-        <!-- Enrolled Teams Section -->
         <div class="enrolled-section">
             <div class="enrolled-header">
                 <h2>Enrolled Teams</h2>
@@ -534,7 +488,6 @@
             </div>
         </div>
     </div>
-
     <script>
         // IMPORTANT: Replace this URL with your Google Apps Script Web App URL
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwimJR822Vm57eMb3-Awm_2OU1OwjDrtC6SI2lLNo7kQ1YGI7PSxzQaINaPnKPKzcQj/exec';
