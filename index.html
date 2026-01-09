@@ -620,6 +620,106 @@
         font-size: 0.85rem;
     }
 }
+        /* Considerations Section */
+.considerations-section {
+    background: white;
+    padding: 4rem 2rem;
+}
+
+.considerations-section h2 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.considerations-intro {
+    text-align: center;
+    font-size: 1.15rem;
+    color: #555;
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    line-height: 1.7;
+}
+
+.considerations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.consideration-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border: 2px solid #e0e6ed;
+    border-radius: 15px;
+    padding: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.consideration-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+    transform: scaleY(0);
+    transition: transform 0.3s;
+}
+
+.consideration-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+    border-color: #667eea;
+}
+
+.consideration-card:hover::before {
+    transform: scaleY(1);
+}
+
+.consideration-number {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.consideration-content p {
+    color: #444;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin: 0;
+}
+
+.consideration-content strong {
+    color: #667eea;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .considerations-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .consideration-card {
+        flex-direction: column;
+    }
+}
 
     </style>
 </head>
@@ -670,7 +770,7 @@
             
             <p class="highlight-text">Within Human in the AI-loop context, we want hackers to think: <strong>How can AI agents act either as a learning partner or as a smart support system to make learning more inclusive and effective?</strong></p>
             
-            <p>Hackers may develop creative AI-artifacts in response to the grand challenges mentioned below. Each grand challenge is supported by a sample description. The sample descriptions for these grand challenges are developed by the students of IIT Delhi in a pre-Hackathon workshop organised in collaboration with Imperial College London and Microsoft Garage.</p>
+            <p>Hackers may develop creative AI-artefacts in response to the grand challenges mentioned below. Each grand challenge is supported by a sample description. The sample descriptions for these grand challenges are developed by the students of IIT Delhi in a pre-Hackathon workshop organised in collaboration with Imperial College London and Microsoft Garage.</p>
             
             <p>The Hackathon teams may select one of these grand challenges, and choose to either develop an AI-prototype in alignment with the sample description, or further adapt and modify the description as per your skills, context, and interests.</p>
         </div>
@@ -694,7 +794,55 @@
             </div>
         </div>
     </section>
+<!-- Considerations Section -->
+<section class="considerations-section">
+    
+    <p class="considerations-intro">While developing the AI-artefacts, the hackers are required to think of the following, which may also reflect in the process and product of what your team comes up with:</p>
+    
+    <div class="considerations-grid">
+        <div class="consideration-card">
+            <div class="consideration-number">1</div>
+            <div class="consideration-content">
+                <p>If the AI-prototype that your team is developing were to be used in real classrooms for collaborative learning, which students' <strong>competencies and skills within STEM settings</strong> will it help building?</p>
+            </div>
+        </div>
 
+        <div class="consideration-card">
+            <div class="consideration-number">2</div>
+            <div class="consideration-content">
+                <p>How will your AI-prototype help students <strong>recognise themselves as STEM learners</strong> while working collaboratively?</p>
+            </div>
+        </div>
+
+        <div class="consideration-card">
+            <div class="consideration-number">3</div>
+            <div class="consideration-content">
+                <p>How will your AI-prototype meant to foster collaboration within students also help them <strong>gain recognition as a science person</strong>—this could be from their peers, teachers, collaborators, family, society, etc. It could be facilitated through welfare for society, ideas of nation-building, pursuing Science for the sake of advancing scientific research, obtaining fellowships for higher studies, network for industry placements, or simply a way to securing any government job.</p>
+            </div>
+        </div>
+
+        <div class="consideration-card">
+            <div class="consideration-number">4</div>
+            <div class="consideration-content">
+                <p>How do the competencies developed (Q1) through using your AI-prototype help in students' <strong>gaining this recognition</strong>—self (Q2) or external (Q3)?</p>
+            </div>
+        </div>
+
+        <div class="consideration-card">
+            <div class="consideration-number">5</div>
+            <div class="consideration-content">
+                <p>How does your AI prototype <strong>promote inclusivity</strong> for learners from traditionally underrepresented groups (such as women and gender-diverse learners, learners with disabilities, learners from rural or non-English-speaking backgrounds, low-income learners, and learners from historically marginalized social groups)?</p>
+            </div>
+        </div>
+
+        <div class="consideration-card">
+            <div class="consideration-number">6</div>
+            <div class="consideration-content">
+                <p>How does your AI prototype <strong>navigate ethical decision-making</strong> by balancing what you consider ethically appropriate with existing institutional norms, policies, and constraints?</p>
+            </div>
+        </div>
+    </div>
+</section>
     <!-- Key Dates Section -->
     <section id="dates">
         <h2>Key Dates</h2>
