@@ -620,7 +620,7 @@
         font-size: 0.85rem;
     }
 }
-        /* Considerations Section */
+/* Considerations Section */
 .considerations-section {
     background: white;
     padding: 4rem 2rem;
@@ -720,22 +720,106 @@
         flex-direction: column;
     }
 }
+/* =========================
+   Responsive Navbar
+   ========================= */
+
+.navbar {
+    background: #2c3e50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 1.2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-brand {
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+/* -------- Mobile -------- */
+@media (max-width: 768px) {
+
+    .nav-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #2c3e50;
+        flex-direction: column;
+        gap: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    body.nav-open .nav-links {
+        max-height: 500px;
+    }
+
+    .nav-links li {
+        border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 0.9rem 1.2rem;
+        font-size: 1rem;
+    }
+}
+
 
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#themes">Themes</a></li>
-            <li><a href="#dates">Key Dates</a></li>
-            <li><a href="#timeline">Timeline</a></li>
-            <li><a href="#prizes">Prizes</a></li>
-            <li><a href="#sponsors">Sponsors</a></li>
-            <li><a href="#team">Team</a></li>
-        </ul>
-    </nav>
+    <nav class="navbar">
+    <div class="nav-brand">AI Collab Hack</div>
+
+    <button class="nav-toggle" onclick="document.body.classList.toggle('nav-open')">
+        ☰
+    </button>
+
+    <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#themes">Themes</a></li>
+        <li><a href="#dates">Key Dates</a></li>
+        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#prizes">Prizes</a></li>
+        <li><a href="#sponsors">Sponsors</a></li>
+        <li><a href="#team">Team</a></li>
+    </ul>
+</nav>
+
 
     <!-- Hero Section -->
     <div id="home" class="hero">
@@ -770,7 +854,7 @@
             
             <p class="highlight-text">Within Human in the AI-loop context, we want hackers to think: <strong>How can AI agents act either as a learning partner or as a smart support system to make learning more inclusive and effective?</strong></p>
             
-            <p>Hackers may develop creative AI-artefacts in response to the grand challenges mentioned below. Each grand challenge is supported by a sample description. The sample descriptions for these grand challenges are developed by the students of IIT Delhi in a pre-Hackathon workshop organised in collaboration with Imperial College London and Microsoft Garage.</p>
+            <p>Hackers may develop creative AI-artifacts in response to the grand challenges mentioned below. Each grand challenge is supported by a sample description. The sample descriptions for these grand challenges are developed by the students of IIT Delhi in a pre-Hackathon workshop organised in collaboration with Imperial College London and Microsoft Garage.</p>
             
             <p>The Hackathon teams may select one of these grand challenges, and choose to either develop an AI-prototype in alignment with the sample description, or further adapt and modify the description as per your skills, context, and interests.</p>
         </div>
@@ -787,16 +871,16 @@
                 <h3>Leveraging AI Agents to Connect Learners with Learners</h3>
             </div>
             <div class="theme-box" onclick="window.open('theme4_page.html', '_blank')">
-                <h3>AI Agents for Multilingual and Accessibility Support</h3>
+                <h3>AI Agents for Multilingual and Accessibility Support in India</h3>
             </div>
             <div class="theme-box" onclick="window.open('theme5_page.html', '_blank')">
                 <h3>AI-Powered Peer Feedback Coach for STEM Outputs</h3>
             </div>
         </div>
     </section>
-<!-- Considerations Section -->
+    <!-- Considerations Section -->
 <section class="considerations-section">
-    
+    <!-- <h2>Key Considerations for Hackers</h2> -->
     <p class="considerations-intro">While developing the AI-artefacts, the hackers are required to think of the following, which may also reflect in the process and product of what your team comes up with:</p>
     
     <div class="considerations-grid">
@@ -843,6 +927,7 @@
         </div>
     </div>
 </section>
+
     <!-- Key Dates Section -->
     <section id="dates">
         <h2>Key Dates</h2>
