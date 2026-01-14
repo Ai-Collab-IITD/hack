@@ -837,6 +837,87 @@
         font-size: 1rem;
     }
 }
+/* =========================
+   Hero Slideshow
+   ========================= */
+
+.hero-slider {
+    position: relative;
+    overflow: hidden;
+    min-height: 85vh;
+}
+
+/* Slides */
+.slides {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+/* Overlay */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1;
+}
+
+/* Bring content above slideshow */
+.hero-content,
+.event-schedule-box {
+    position: relative;
+    z-index: 2;
+}
+
+/* Arrows */
+.slide-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    background: rgba(0,0,0,0.4);
+    border: none;
+    color: white;
+    font-size: 3rem;
+    padding: 0.3rem 0.8rem;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.slide-arrow:hover {
+    background: rgba(0,0,0,0.65);
+}
+
+.slide-arrow.left {
+    left: 1rem;
+}
+
+.slide-arrow.right {
+    right: 1rem;
+}
+
+/* Mobile tweaks */
+@media (max-width: 768px) {
+    .slide-arrow {
+        font-size: 2.2rem;
+    }
+}
+
 
 
     </style>
@@ -863,30 +944,60 @@
 
 
     <!-- Hero Section -->
-    <div id="home" class="hero">
-        <div class="hero-content">
-            <h1>Welcome to the AI Collab Hack</h1>
-            <p class="hero-subtitle">Collaboration is key to success in any environment. In learning sphere, collaborative learning can not only speed up the learning process but also give wings to innovation.</p>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdC3YNNPTZhZIDdCGG6vPKqEo5Dc-COkoK_nAma19H1idYIvA/viewform?usp=dialog" target="_blank" class="register-btn">Register Now</a>
+    <!-- Hero Section with Slideshow -->
+<div id="home" class="hero hero-slider">
+
+    <!-- Slideshow -->
+    <div class="slides">
+        <img src="i1.png" class="slide active">
+        <img src="i2.png" class="slide">
+        <img src="i3.png" class="slide">
+        <img src="i4.png" class="slide">
+        <img src="i5.png" class="slide">
+        <img src="i6.png" class="slide">
+    </div>
+
+    <!-- Dark overlay for readability -->
+    <div class="hero-overlay"></div>
+
+    <!-- Content (UNCHANGED) -->
+    <div class="hero-content">
+        <h1>Welcome to the AI Collab Hack</h1>
+        <p class="hero-subtitle">
+            Collaboration is key to success in any environment. In learning sphere,
+            collaborative learning can not only speed up the learning process but also give wings to innovation.
+        </p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdC3YNNPTZhZIDdCGG6vPKqEo5Dc-COkoK_nAma19H1idYIvA/viewform?usp=dialog"
+           target="_blank" class="register-btn">
+            Register Now
+        </a>
+    </div>
+
+    <!-- Event Schedule (UNCHANGED) -->
+    <div class="event-schedule-box"
+         onclick="document.getElementById('dates').scrollIntoView({behavior: 'smooth'})">
+        <svg class="calendar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        <h3>Event Schedule</h3>
+        <div class="schedule-item">
+            <strong>Pre-Registration Opens</strong>
+            <span>January 15, 2026</span>
         </div>
-        <div class="event-schedule-box" onclick="document.getElementById('dates').scrollIntoView({behavior: 'smooth'})">
-            <svg class="calendar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="16" y1="2" x2="16" y2="6"></line>
-                <line x1="8" y1="2" x2="8" y2="6"></line>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-            </svg>
-            <h3>Event Schedule</h3>
-            <div class="schedule-item">
-                <strong>Pre-Registration Opens</strong>
-                <span>January 15, 2026</span>
-            </div>
-            <div class="schedule-item">
-                <strong>Hackathon</strong>
-                <span>February 27-28, 2026</span>
-            </div>
+        <div class="schedule-item">
+            <strong>Hackathon</strong>
+            <span>February 27-28, 2026</span>
         </div>
     </div>
+
+    <!-- Arrows -->
+    <button class="slide-arrow left" onclick="prevSlide()">‹</button>
+    <button class="slide-arrow right" onclick="nextSlide()">›</button>
+</div>
+
 
     <!-- Introduction Section -->
     <section class="intro-section">
@@ -1143,5 +1254,32 @@
             </div>
         </div>
     </section>
+    <script>
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+    let slideInterval = setInterval(nextSlide, 6000);
+
+    function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[index].classList.add('active');
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    
+
+    document.querySelector('.hero-slider').addEventListener('mouseleave', () => {
+        slideInterval = setInterval(nextSlide, 6000 );
+    });
+</script>
+
 </body>
 </html>
