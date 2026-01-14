@@ -918,6 +918,23 @@
     }
 }
 
+/* Default: show desktop slides */
+.desktop-slides {
+    display: block;
+}
+.mobile-slides {
+    display: none;
+}
+
+/* Mobile: switch slides */
+@media (max-width: 768px) {
+    .desktop-slides {
+        display: none;
+    }
+    .mobile-slides {
+        display: block;
+    }
+}
 
 
     </style>
@@ -948,7 +965,7 @@
 <div id="home" class="hero hero-slider">
 
     <!-- Slideshow -->
-    <div class="slides">
+    <div class="slides desktop-slides">
         <img src="i1.png" class="slide active">
         <img src="i2.png" class="slide">
         <img src="i3.png" class="slide">
@@ -956,6 +973,16 @@
         <img src="i5.png" class="slide">
         <img src="i6.png" class="slide">
     </div>
+    <div class="slides mobile-slides">
+    <img src="m1.png" class="slide active">
+    <img src="m2.png" class="slide">
+    <img src="m3.png" class="slide">
+    <img src="m4.png" class="slide">
+    <img src="m5.png" class="slide">
+    <img src="m6.png" class="slide">
+    <img src="m7.png" class="slide">
+</div>
+
 
     <!-- Dark overlay for readability -->
     <div class="hero-overlay"></div>
@@ -1254,31 +1281,64 @@
             </div>
         </div>
     </section>
-    <script>
-    const slides = document.querySelectorAll('.slide');
-    let currentSlide = 0;
-    let slideInterval = setInterval(nextSlide, 6000);
+ <script>
+function getActiveSlides() {
+    return document.querySelectorAll(
+        window.innerWidth <= 768
+            ? '.mobile-slides .slide'
+            : '.desktop-slides .slide'
+    );
+}
 
-    function showSlide(index) {
-        slides.forEach(slide => slide.classList.remove('active'));
-        slides[index].classList.add('active');
-    }
+let slides = getActiveSlides();
+let currentSlide = 0;
+let slideInterval = null;
+const SLIDE_DELAY = 12000; // 12 seconds
 
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-    }
+function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[index].classList.add('active');
+}
 
-    function prevSlide() {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(currentSlide);
-    }
+function resetAutoSlide() {
+    if (slideInterval) clearInterval(slideInterval);
+    slideInterval = setInterval(nextSlide, SLIDE_DELAY);
+}
 
-    
+function nextSlide() {
+    slides = getActiveSlides();
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}
 
-    document.querySelector('.hero-slider').addEventListener('mouseleave', () => {
-        slideInterval = setInterval(nextSlide, 12000 );
-    });
+function prevSlide() {
+    slides = getActiveSlides();
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(currentSlide);
+}
+
+/* Arrow clicks reset timer */
+function nextSlideWithReset() {
+    nextSlide();
+    resetAutoSlide();
+}
+
+function prevSlideWithReset() {
+    prevSlide();
+    resetAutoSlide();
+}
+
+/* Start auto-slide */
+resetAutoSlide();
+
+
+/* Handle resize (desktop <-> mobile switch) */
+window.addEventListener('resize', () => {
+    currentSlide = 0;
+    slides = getActiveSlides();
+    showSlide(currentSlide);
+    resetAutoSlide();
+});
 </script>
 
 </body>
