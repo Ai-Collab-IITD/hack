@@ -268,33 +268,6 @@
         }
 
 
-        /* Prize Section */
-        .prize-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .prize-box {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            border-radius: 10px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .prize-box h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-
-        .prize-box .amount {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
 
 /* Sponsors Section */
 #sponsors {
@@ -370,12 +343,33 @@
 }
 
         /* Team Section */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
+        
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* ALWAYS 2 per row */
+    gap: 2rem;
+    margin-top: 2rem;
+    max-width: 800px;      /* keeps it visually centered & neat */
+    margin-left: auto;
+    margin-right: auto;
+}
+@media (max-width: 600px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+     .team-member {
+        padding: 1.3rem;
+    }
+
+    .team-member .photo {
+        width: 110px;
+        height: 110px;
+    }
+
+    .team-member h4 {
+        font-size: 1.1rem;
+    }
+}
 
         .team-member {
             background: white;
@@ -935,6 +929,108 @@
         display: block;
     }
 }
+/* Team Placeholder Section */
+.team-placeholder {
+    text-align: center;
+    padding: 3.5rem 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.team-placeholder .coming-soon {
+    font-size: 1.15rem;
+    color: #666;
+    margin-top: 1rem;
+    font-style: italic;
+    letter-spacing: 0.3px;
+}
+#prizes {
+    padding: 5rem 2rem;
+    background: #f8f9fc;
+}
+
+#prizes h2 {
+    font-size: 2.8rem;
+    margin-bottom: 3rem;
+    color: #1f2937;
+    letter-spacing: -0.5px;
+}
+
+.prize-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 per row on laptop */
+    gap: 2.5rem;
+    max-width: 900px;
+    margin: auto;
+}
+.section-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #4b5563;
+    margin-bottom: 3rem;
+}
+
+
+/* Card styling */
+.prize-box {
+    background: linear-gradient(160deg, #6f7bf7, #7a55c1);
+    color: white;
+    padding: 2.5rem 2rem;
+    border-radius: 18px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.18);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glow effect */
+.prize-box::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top, rgba(255,255,255,0.25), transparent 60%);
+    opacity: 0.6;
+}
+
+.prize-box:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 25px 55px rgba(0,0,0,0.3);
+}
+
+/* Headings */
+.prize-box h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1.4rem;
+    font-weight: 700;
+}
+
+/* Icons */
+.prize-icon {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* Text */
+.prize-box p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+    opacity: 0.95;
+}
+
+.prize-box strong {
+    color: #ffeb99;
+    font-weight: 600;
+}
+
+/* Mobile refinement */
+@media (max-width: 600px) {
+    #prizes h2 {
+        font-size: 2.2rem;
+    }
+}
 
 
     </style>
@@ -950,12 +1046,13 @@
 
     <ul class="nav-links">
         <li><a href="#home">Home</a></li>
-        <li><a href="#themes">Themes</a></li>
+        <li><a href="#themes">Grand Challenges</a></li>
         <li><a href="#dates">Key Dates</a></li>
         <li><a href="#timeline">Timeline</a></li>
         <li><a href="#prizes">Prizes</a></li>
         <li><a href="#sponsors">Sponsors</a></li>
         <li><a href="#team">Team</a></li>
+        <li><a href="#team-microsoft">Team Microsoft</a></li>
     </ul>
 </nav>
 
@@ -1041,7 +1138,7 @@
 
     <!-- Themes Section -->
     <section id="themes">
-        <h2>Themes</h2>
+        <h2>Grand Challenges</h2>
         <div class="theme-grid">
             <div class="theme-box" onclick="window.open('theme1_page.html', '_blank')">
                 <h3>AI agents for collaborative content creation and knowledge curation</h3>
@@ -1186,27 +1283,46 @@
         </div>
     </section>
 
-    <!-- Prizes Section -->
     <section id="prizes">
-        <h2>Prizes</h2>
-        <div class="prize-grid">
-            <div class="prize-box">
-                <h3>🥇 First Place</h3>
-                <div class="amount">₹50,000</div>
-                <p>+ Mentorship opportunities</p>
-            </div>
-            <div class="prize-box">
-                <h3>🥈 Second Place</h3>
-                <div class="amount">₹30,000</div>
-                <p>+ Certificate of Excellence</p>
-            </div>
-            <div class="prize-box">
-                <h3>🥉 Third Place</h3>
-                <div class="amount">₹20,000</div>
-                <p>+ Recognition & Swag</p>
-            </div>
-        </div>
-    </section>
+    <h2>Prizes & Opportunities</h2>
+<p class="section-subtitle">
+Build. Compete. Get noticed by Microsoft.
+</p>
+
+    <div class="prize-grid">
+
+        <div class="prize-box">
+    <h3><span class="prize-icon"></span> Winner Prizes</h3>
+    <p>Microsoft Kits for top-performing teams</p>
+    <p>Mentorship opportunities for the top 3 teams from each Grand Challenge</p>
+    <p>Recognition from industry and academic experts</p>
+</div>
+
+<div class="prize-box">
+    <h3><span class="prize-icon"></span> Exclusive Microsoft Showcase</h3>
+    <p><strong>Top 4 teams</strong> (1 winner from each challenge)</p>
+    <p>Opportunity to present ideas to <strong>Microsoft leadership</strong></p>
+    <p>Presentation at <strong>Microsoft Garage, Noida</strong></p>
+</div>
+
+<div class="prize-box">
+    <h3><span class="prize-icon"></span> Certificates & Recognition</h3>
+    <p>All participants get co-branded certificates from</p>
+    <p><strong>IIT Delhi</strong></p>
+    <p><strong>Imperial College London</strong></p>
+    <p><strong>Microsoft Garage</strong></p>
+</div>
+
+<div class="prize-box">
+    <h3><span class="prize-icon"></span> More Than Just Prizes</h3>
+    <p>Networking opportunities with <strong>Microsoft professionals</strong></p>
+    <p><strong>Pizzas and refreshments</strong></p>
+</div>
+
+
+    </div>
+</section>
+
 
     <!-- Sponsors Section -->
    <!-- Sponsors Section -->
@@ -1250,37 +1366,52 @@
         <h2>Team</h2>
         <div class="team-grid">
             <div class="team-member">
-                <div class="photo">Photo</div>
-                <h4>Team Member Name</h4>
-                <p>Role / Position</p>
+                <img class="photo" src="deb.png" alt="Debananda Misra">
+                <h4>Debananda Misra</h4>
+                <p>Principal Investigator</p>
             </div>
             <div class="team-member">
-                <div class="photo">Photo</div>
-                <h4>Team Member Name</h4>
-                <p>Role / Position</p>
+                <img class="photo" src="cam.png" alt="Camille K Howson">
+                <h4>Camille Kandiko Howson</h4>
+                <p>Principal Investigator</p>
             </div>
             <div class="team-member">
-                <div class="photo">Photo</div>
-                <h4>Team Member Name</h4>
-                <p>Role / Position</p>
+                <img class="photo" src="sheriya.png" alt="Sheriya Sareen">
+                <h4>Sheriya Sareen</h4>
+                <p>Project Lead</p>
             </div>
             <div class="team-member">
-                <div class="photo">Photo</div>
-                <h4>Team Member Name</h4>
-                <p>Role / Position</p>
+                <img class="photo" src="deepakshi.png" alt="Deepakshi Bhardwaj">
+                <h4>Deepakshi Bhardwaj</h4>
+                <p>Project Management</p>
             </div>
             <div class="team-member">
-                <div class="photo">Photo</div>
-                <h4>Team Member Name</h4>
-                <p>Role / Position</p>
+                <img class="photo" src="jay.png" alt="Jagad Jay">
+                <h4>Jagad Jay</h4>
+                <p>Design Consultant</p>
             </div>
             <div class="team-member">
-                <div class="photo">Photo</div>
-                <h4>Team Member Name</h4>
-                <p>Role / Position</p>
+                <img class="photo" src="sid.png" alt="Sidharth Manoj">
+                <h4>Sidharth Manoj</h4>
+                <p>Design Consultant</p>
+            </div>
+            <div class="team-member">
+                <img class="photo" src="me.png" alt="Rohan Roy">
+                <h4>Rohan Roy</h4>
+                <p>Technical Consultant</p>
+            </div>
+            <div class="team-member">
+                <img class="photo" src="arnav.png" alt="Arnav Raj">
+                <h4>Arnav Raj</h4>
+                <p>Technical Consultant</p>
             </div>
         </div>
     </section>
+    <section id="team-microsoft" class="team-placeholder">
+    <h2>Team Microsoft</h2>
+    <p class="coming-soon">Will be announced soon.</p>
+</section>
+
  <script>
 function getActiveSlides() {
     return document.querySelectorAll(
