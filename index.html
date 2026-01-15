@@ -1037,6 +1037,109 @@
         gap: 2rem;
     }
 }
+#dates {
+    padding: 5rem 2rem;
+    background: linear-gradient(to bottom, #f8f9fc, #ffffff);
+}
+
+#dates h2 {
+    text-align: center;
+    font-size: 2.6rem;
+    margin-bottom: 3.5rem;
+}
+
+/* Container */
+.dates-vertical {
+    max-width: 750px;
+    margin: auto;
+    position: relative;
+    padding-left: 40px;
+}
+
+/* Vertical line */
+.dates-vertical::before {
+    content: "";
+    position: absolute;
+    left: 16px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, #667eea, #764ba2);
+    border-radius: 4px;
+}
+
+/* Card wrapper */
+.date-v-card {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2.8rem;
+    position: relative;
+}
+
+/* Dot */
+.v-dot {
+    width: 16px;
+    height: 16px;
+    background: #667eea;
+    border-radius: 50%;
+    margin-right: 1.5rem;
+    margin-top: 0.4rem;
+    box-shadow: 0 0 0 6px rgba(102,126,234,0.2);
+    flex-shrink: 0;
+}
+
+/* Card */
+.v-content {
+    background: white;
+    padding: 1.8rem 2rem;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.v-content:hover {
+    transform: translateX(6px);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.2);
+}
+
+/* Text */
+.v-content h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+}
+
+.v-content p {
+    font-size: 1.05rem;
+    color: #555;
+}
+
+/* Highlight */
+.date-v-card.highlight .v-content {
+    background: linear-gradient(160deg, #667eea, #764ba2);
+    color: white;
+}
+
+.date-v-card.highlight p {
+    color: #f3f4f6;
+}
+
+.date-v-card.highlight .v-dot {
+    background: #ffd166;
+    box-shadow: 0 0 0 6px rgba(255,209,102,0.35);
+}
+
+/* Mobile polish */
+@media (max-width: 600px) {
+    .dates-vertical {
+        padding-left: 30px;
+    }
+
+    .v-content {
+        padding: 1.5rem;
+    }
+}
 
 
 
@@ -1045,7 +1148,7 @@
 <body>
     <!-- Navigation -->
     <nav class="navbar">
-    <div class="nav-brand">AI Collab Hack</div>
+    <div class="nav-brand">AI-Collab Hack</div>
 
     <button class="nav-toggle" onclick="document.body.classList.toggle('nav-open')">
         ☰
@@ -1055,11 +1158,11 @@
         <li><a href="#home">Home</a></li>
         <li><a href="#themes">Grand Challenges</a></li>
         <li><a href="#dates">Key Dates</a></li>
-        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#timeline">Project Overview</a></li>
         <li><a href="#prizes">Prizes</a></li>
         <li><a href="#sponsors">Sponsors</a></li>
         <li><a href="#team">Team</a></li>
-        <li><a href="#team-microsoft">Team Microsoft</a></li>
+        <!-- <li><a href="#team-microsoft">Team Microsoft</a></li> -->
     </ul>
 </nav>
 
@@ -1093,7 +1196,7 @@
 
     <!-- Content (UNCHANGED) -->
     <div class="hero-content">
-        <h1>Welcome to the AI Collab Hack</h1>
+        <h1>Welcome to the AI-Collab Hack</h1>
         <p class="hero-subtitle">
             Collaboration is key to success in any environment. In learning sphere,
             collaborative learning can not only speed up the learning process but also give wings to innovation.
@@ -1115,7 +1218,7 @@
         </svg>
         <h3>Event Schedule</h3>
         <div class="schedule-item">
-            <strong>Pre-Registration Opens</strong>
+            <strong>Registration Opens</strong>
             <span>January 15, 2026</span>
         </div>
         <div class="schedule-item">
@@ -1211,36 +1314,58 @@
     </div>
 </section>
 
-    <!-- Key Dates Section -->
-    <section id="dates">
-        <h2>Key Dates</h2>
-        <div class="dates-list">
-            <div class="date-item">
-                <span><strong>Registration Opens</strong></span>
-                <span>January 15, 2026</span>
-            </div>
-            <div class="date-item">
-                <span><strong>Registrations Closes</strong></span>
-                <span>January 26, 2026</span>
-            </div>
-            <div class="date-item">
-                <span><strong>Orientation + Expert Talk 1</strong></span>
-                <span>February 4, 2026</span>
-            </div>
-            <div class="date-item">
-                <span><strong>Expert Talk 2</strong></span>
-                <span>February 11, 2026</span>
-            </div>
-            <div class="date-item">
-                <span><strong>Hackathon</strong></span>
-                <span>February 27-28, 2026</span>
+ <!-- Key Dates Section -->
+<section id="dates">
+    <h2>Key Dates</h2>
+
+    <div class="dates-vertical">
+        <div class="date-v-card">
+            <span class="v-dot"></span>
+            <div class="v-content">
+                <h4>Registration Opens</h4>
+                <p>January 15, 2026</p>
             </div>
         </div>
-    </section>
+
+        <div class="date-v-card">
+            <span class="v-dot"></span>
+            <div class="v-content">
+                <h4>Registration Closes</h4>
+                <p>January 26, 2026</p>
+            </div>
+        </div>
+
+        <div class="date-v-card">
+            <span class="v-dot"></span>
+            <div class="v-content">
+                <h4>Orientation + Expert Talk 1</h4>
+                <p>February 4, 2026</p>
+            </div>
+        </div>
+
+        <div class="date-v-card">
+            <span class="v-dot"></span>
+            <div class="v-content">
+                <h4>Expert Talk 2</h4>
+                <p>February 11, 2026</p>
+            </div>
+        </div>
+
+        <div class="date-v-card highlight">
+            <span class="v-dot"></span>
+            <div class="v-content">
+                <h4>Hackathon</h4>
+                <p>February 27–28, 2026</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 
     <!-- Timeline Section -->
     <section id="timeline">
-        <h2>Project Timeline</h2>
+        <h2>Project Overview</h2>
         <p class="timeline-subtitle">This hackathon is part of a wider research project exploring AI in collaborative learning</p>
         <div class="timeline-container">
             <div class="timeline-item completed">
@@ -1301,7 +1426,7 @@ Build. Compete. Get noticed by Microsoft.
         <div class="prize-box">
     <h3><span class="prize-icon"></span> Winner Prizes</h3>
     <p>Microsoft Kits for top-performing teams</p>
-    <p>Mentorship opportunities for the top 3 teams from each Grand Challenge</p>
+    <p>Mentorship opportunities for the top  team from each Grand Challenge</p>
     <p>Recognition from industry and academic experts</p>
 </div>
 
@@ -1415,7 +1540,7 @@ Build. Compete. Get noticed by Microsoft.
         </div>
     </section>
     <section id="team-microsoft" class="team-placeholder">
-    <h2>Team Microsoft</h2>
+    <h2>Microsoft Representatives</h2>
     <p class="coming-soon">Will be announced soon.</p>
 </section>
 
