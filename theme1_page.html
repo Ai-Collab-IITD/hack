@@ -403,10 +403,107 @@
                 padding: 2rem;
             }
         }
+
+        /* Top Partner Bar */
+.top-partners-bar {
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 0.8rem 2rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.top-partners-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;  /* Changed from space-between */
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.partners-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.top-partners-logos {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    flex: 1;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.top-partner-logo {
+    height: 35px;
+    width: auto;
+    object-fit: contain;
+    opacity: 0.85;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    cursor: pointer;
+}
+
+.top-partner-logo:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .top-partners-bar {
+        padding: 0.6rem 1rem;  /* Reduced padding */
+    }
+    
+    .top-partners-container {
+        justify-content: center;
+        text-align: center;
+        gap: 1rem;  /* Reduced gap */
+    }
+
+    .partners-label {
+        width: 100%;
+        margin-bottom: 0.5rem;
+        font-size: 0.7rem;  /* Smaller text */
+    }
+
+    .top-partners-logos {
+        justify-content: center;
+        gap: 1rem;  /* Reduced gap between logos */
+    }
+
+    .top-partner-logo {
+        height: 22px;  /* Changed from 28px to 22px - much smaller */
+    }
+}   
     </style>
 
 </head>
 <body>
+        <!-- Top Partner Logos Bar -->
+<div class="top-partners-bar">
+    <div class="top-partners-container">
+        <span class="partners-label">In Partnership With</span>
+        <div class="top-partners-logos">
+            <a href="https://www.microsoft.com" target="_blank">
+                <img src="msft.png" alt="Microsoft" class="top-partner-logo">
+            </a>
+            <a href="https://www.microsoft.com/en-us/garage/" target="_blank">
+                <img src="garage.png" alt="Microsoft Garage" class="top-partner-logo">
+            </a>
+            <a href="https://www.imperial.ac.uk/" target="_blank">
+                <img src="icl.png" alt="Imperial College London" class="top-partner-logo">
+            </a>
+            <a href="https://spp.iitd.ac.in/" target="_blank">
+                <img src="iitd.png" alt="IIT Delhi" class="top-partner-logo">
+            </a>
+        </div>
+    </div>
+</div>
 
     <div class="nav-bar">
         <div class="nav-content">
