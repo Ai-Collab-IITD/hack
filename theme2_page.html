@@ -597,30 +597,61 @@
         }
 
         function displayTeams(data) {
-            const countElement = document.getElementById('teamCount');
-            const containerElement = document.getElementById('teamsContainer');
-            
-            countElement.textContent = `${data.totalTeams} ${data.totalTeams === 1 ? 'Team' : 'Teams'} Enrolled`;
-            
-            if (data.totalTeams === 0) {
-                containerElement.innerHTML = '<div class="no-teams">No teams have enrolled in this theme yet. Be the first!</div>';
-                return;
-            }
-            
-            const teamsHTML = data.teams.map(team => `
-                <div class="team-card">
-                    <h3>${team.teamName}</h3>
-                    <ul class="member-list">
-                        ${team.member1 ? `<li class="member-item">${team.member1}</li>` : ''}
-                        ${team.member2 ? `<li class="member-item">${team.member2}</li>` : ''}
-                        ${team.member3 ? `<li class="member-item">${team.member3}</li>` : ''}
-                    </ul>
-                </div>
-            `).join('');
-            
-            containerElement.innerHTML = `<div class="teams-grid">${teamsHTML}</div>`;
-        }
-
+    const countElement = document.getElementById('teamCount');
+    const containerElement = document.getElementById('teamsContainer');
+    
+    // Filter teams into valid teams and individuals
+    const validTeams = data.teams.filter(team => {
+        const teamName = team.teamName.trim().toUpperCase();
+        return teamName !== 'N/A' && 
+               teamName !== 'NA' && 
+               teamName !== 'N.A' && 
+               teamName !== 'N.A.';
+    });
+    
+    const individualTeams = data.teams.filter(team => {
+        const teamName = team.teamName.trim().toUpperCase();
+        return teamName === 'N/A' || 
+               teamName === 'NA' || 
+               teamName === 'N.A' || 
+               teamName === 'N.A.';
+    });
+    
+    // Only count valid teams (not individuals)
+    const validTeamCount = validTeams.length;
+    countElement.textContent = `${validTeamCount} ${validTeamCount === 1 ? 'Team' : 'Teams'} Enrolled`;
+    
+    if (validTeamCount === 0 && individualTeams.length === 0) {
+        containerElement.innerHTML = '<div class="no-teams">No teams have enrolled in this theme yet. Be the first!</div>';
+        return;
+    }
+    
+    // Display valid teams
+    const teamsHTML = validTeams.map(team => `
+        <div class="team-card">
+            <h3>${team.teamName}</h3>
+            <ul class="member-list">
+                ${team.member1 ? `<li class="member-item">${team.member1}</li>` : ''}
+                ${team.member2 ? `<li class="member-item">${team.member2}</li>` : ''}
+                ${team.member3 ? `<li class="member-item">${team.member3}</li>` : ''}
+            </ul>
+        </div>
+    `).join('');
+    
+    // Display individuals under "Individual Participants"
+    const individualsHTML = individualTeams.map(team => `
+        <div class="team-card">
+            <h3>Individual Participant</h3>
+            <ul class="member-list">
+                ${team.member1 ? `<li class="member-item">${team.member1}</li>` : ''}
+                ${team.member2 ? `<li class="member-item">${team.member2}</li>` : ''}
+                ${team.member3 ? `<li class="member-item">${team.member3}</li>` : ''}
+            </ul>
+        </div>
+    `).join('');
+    
+    containerElement.innerHTML = `<div class="teams-grid">${teamsHTML}${individualsHTML}</div>`;
+}
         function displayError(message) {
             const containerElement = document.getElementById('teamsContainer');
             containerElement.innerHTML = `<div class="error-message">${message}</div>`;
