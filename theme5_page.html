@@ -601,62 +601,69 @@
             }
         }
 
-        function displayTeams(data) {
+function displayTeams(data) {
     const countElement = document.getElementById('teamCount');
     const containerElement = document.getElementById('teamsContainer');
-    
-    // Filter teams into valid teams and individuals
-    const validTeams = data.teams.filter(team => {
-        const teamName = team.teamName.trim().toUpperCase();
-        return teamName !== 'N/A' && 
-               teamName !== 'NA' && 
-               teamName !== 'N.A' && 
-               teamName !== 'N.A.';
+
+    const validTeams = [];
+    const individualPool = [];
+    const individualAliases = ['n/a', 'na', 'n.a.', ''];
+
+    data.teams.forEach(team => {
+        if (individualAliases.includes(team.teamName.trim().toLowerCase())
+)  {
+           Object.values(team)
+    .filter(v =>
+        typeof v === 'string' &&
+        v.trim() !== '' &&
+        !individualAliases.includes(v.trim().toLowerCase())
+    )
+    .forEach(name => individualPool.push(name));
+
+        } else {
+            validTeams.push(team);
+        }
     });
-    
-    const individualTeams = data.teams.filter(team => {
-        const teamName = team.teamName.trim().toUpperCase();
-        return teamName === 'N/A' || 
-               teamName === 'NA' || 
-               teamName === 'N.A' || 
-               teamName === 'N.A.';
-    });
-    
-    // Only count valid teams (not individuals)
-    const validTeamCount = validTeams.length;
-    countElement.textContent = `${validTeamCount} ${validTeamCount === 1 ? 'Team' : 'Teams'} Enrolled`;
-    
-    if (validTeamCount === 0 && individualTeams.length === 0) {
-        containerElement.innerHTML = '<div class="no-teams">No teams have enrolled in this theme yet. Be the first!</div>';
+
+    countElement.textContent = `${validTeams.length} ${validTeams.length === 1 ? 'Team' : 'Teams'} Enrolled`;
+
+    if (validTeams.length === 0 && individualPool.length === 0) {
+        containerElement.innerHTML = `<div class="no-teams">No teams enrolled yet.</div>`;
         return;
     }
-    
-    // Display valid teams
-    const teamsHTML = validTeams.map(team => `
+
+    const teamsHTML = validTeams.map(team => {
+        const members = Object.values(team)
+            .filter(v => typeof v === 'string' && v.trim() !== '' && v !== team.teamName);
+
+        return `
+            <div class="team-card">
+                <h3>${team.teamName}</h3>
+                <ul class="member-list">
+                    ${members.map(m => `<li class="member-item">${m}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+    }).join('');
+
+    const individualsHTML = individualPool.length ? `
         <div class="team-card">
-            <h3>${team.teamName}</h3>
+            <h3>Individual Participants</h3>
             <ul class="member-list">
-                ${team.member1 ? `<li class="member-item">${team.member1}</li>` : ''}
-                ${team.member2 ? `<li class="member-item">${team.member2}</li>` : ''}
-                ${team.member3 ? `<li class="member-item">${team.member3}</li>` : ''}
+                ${individualPool.map(m => `<li class="member-item">${m}</li>`).join('')}
             </ul>
         </div>
-    `).join('');
-    
-    // Display individuals under "Individual Participants"
-    const individualsHTML = individualTeams.map(team => `
-        <div class="team-card">
-            <h3>Individual Participant</h3>
-            <ul class="member-list">
-                ${team.member1 ? `<li class="member-item">${team.member1}</li>` : ''}
-                ${team.member2 ? `<li class="member-item">${team.member2}</li>` : ''}
-                ${team.member3 ? `<li class="member-item">${team.member3}</li>` : ''}
-            </ul>
+    ` : '';
+
+    containerElement.innerHTML = `
+        <div class="teams-grid">
+            ${teamsHTML}
+            ${individualsHTML}
         </div>
-    `).join('');
-    
-    containerElement.innerHTML = `<div class="teams-grid">${teamsHTML}${individualsHTML}</div>`;
+    `;
 }
+
+
 
         function displayError(message) {
             const containerElement = document.getElementById('teamsContainer');
