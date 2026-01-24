@@ -599,56 +599,37 @@
             }
         }
 
- function displayTeams(data) {
+function displayTeams(data) {
     const countElement = document.getElementById('teamCount');
     const containerElement = document.getElementById('teamsContainer');
 
-    const validTeams = [];
-    const individualPool = [];
-    const individualAliases = ['n/a', 'na', 'n.a.', ''];
+    // Separate individuals from teams
+    const individualTeam = data.teams.find(t => t.teamName === 'Individual Participants');
+    const regularTeams = data.teams.filter(t => t.teamName !== 'Individual Participants');
 
-    data.teams.forEach(team => {
-        if (individualAliases.includes(team.teamName.trim().toLowerCase())
-)  {
-           Object.values(team)
-    .filter(v =>
-        typeof v === 'string' &&
-        v.trim() !== '' &&
-        !individualAliases.includes(v.trim().toLowerCase())
-    )
-    .forEach(name => individualPool.push(name));
+    countElement.textContent = `${regularTeams.length} ${regularTeams.length === 1 ? 'Team' : 'Teams'} Enrolled`;
 
-        } else {
-            validTeams.push(team);
-        }
-    });
-
-    countElement.textContent = `${validTeams.length} ${validTeams.length === 1 ? 'Team' : 'Teams'} Enrolled`;
-
-    if (validTeams.length === 0 && individualPool.length === 0) {
+    if (regularTeams.length === 0 && !individualTeam) {
         containerElement.innerHTML = `<div class="no-teams">No teams enrolled yet.</div>`;
         return;
     }
 
-    const teamsHTML = validTeams.map(team => {
-        const members = Object.values(team)
-            .filter(v => typeof v === 'string' && v.trim() !== '' && v !== team.teamName);
-
+    const teamsHTML = regularTeams.map(team => {
         return `
             <div class="team-card">
                 <h3>${team.teamName}</h3>
                 <ul class="member-list">
-                    ${members.map(m => `<li class="member-item">${m}</li>`).join('')}
+                    ${team.members.map(m => `<li class="member-item">${m}</li>`).join('')}
                 </ul>
             </div>
         `;
     }).join('');
 
-    const individualsHTML = individualPool.length ? `
+    const individualsHTML = individualTeam ? `
         <div class="team-card">
             <h3>Individual Participants</h3>
             <ul class="member-list">
-                ${individualPool.map(m => `<li class="member-item">${m}</li>`).join('')}
+                ${individualTeam.members.map(m => `<li class="member-item">${m}</li>`).join('')}
             </ul>
         </div>
     ` : '';
