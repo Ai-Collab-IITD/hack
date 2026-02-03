@@ -90,11 +90,28 @@
             transition: all 0.3s;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
+        .guide-btn {
+            display: inline-block;
+            background: red;
+            color: #667eea;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
 
         .register-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-            background: #f8f9fa;
+            background: green;
+        }
+        .guide-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            background: blue    ;
         }
 
         .event-schedule-box {
@@ -1282,6 +1299,91 @@
         margin-bottom: 2rem;
     }
 }
+/* Document Section */
+.document-section {
+    background: white;
+    padding: 5rem 2rem;
+}
+
+.document-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.document-container h2 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.document-description {
+    font-size: 1.15rem;
+    color: #666;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+
+.document-actions {
+    margin-bottom: 2rem;
+}
+
+.download-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.9rem 2rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.document-viewer {
+    position: relative;
+    padding-bottom: 75%; /* 4:3 aspect ratio for documents */
+    height: 0;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    background: #f5f5f5;
+}
+
+.document-viewer iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+    .document-section {
+        padding: 3rem 1rem;
+    }
+    
+    .document-container h2 {
+        font-size: 2rem;
+    }
+    
+    .document-description {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .document-viewer {
+        padding-bottom: 100%; /* More square on mobile */
+    }
+}
 
 
     </style>
@@ -1318,6 +1420,7 @@
     <ul class="nav-links">
         <li><a href="#home">Home</a></li>
         <li><a href="#themes">Grand Challenges</a></li>
+        <li><a href="#deliverables">Resources</a></li>
         <li><a href="#dates">Key Dates</a></li>
         <li><a href="#timeline">AI-Collab Learning Project Overview</a></li>
         <li><a href="#prizes">Prizes</a></li>
@@ -1362,6 +1465,10 @@
            target="_blank" class="register-btn">
             Register Now
         </a>
+         <a href="https://drive.google.com/file/d/10_c_BStGGIMR-zZkqTTOghflAknTHlXX/view?usp=sharing"
+           target="_blank" class="guide-btn" >
+            Guidebook
+        </a>
     </div>
 
     <!-- Event Schedule (UNCHANGED) -->
@@ -1375,9 +1482,9 @@
         </svg>
         <h3>Event Schedule</h3>
         <div class="schedule-item">
-            <strong>Introductory session</strong>
-            <span><a href="https://drive.google.com/file/d/1O-KrraUSVxr83Ux-BgO9ZqCEIy3PoG98/view?usp=sharing">Find the schedule here</a></span>
-            <span>January 28, 2026</span>
+            <strong>Expert Talk: <br>Reimagining Education in the age of AI</strong>
+            <span>Speaker : <a href="https://www.linkedin.com/in/tanujabapat/">Tanuja Ganu</a></span>
+            <span>February 4, 2026</span>
             <span>3:30 pm - 5 pm</span>
             <span>LH 310</span>
         </div>
@@ -1408,7 +1515,19 @@
     </div>
 </section>
 
-
+<!-- Document Section -->
+<section id="deliverables" class="document-section">
+    <div class="document-container">
+        <h2>Resources and Deliverables</h2>
+        <p class="document-description">Review the guide for understanding all the deliverables and the resources you might use for the hackathon.</p>
+        
+        <div class="document-actions">
+            <a href="https://drive.google.com/file/d/10_c_BStGGIMR-zZkqTTOghflAknTHlXX/view?usp=sharing" target="_blank" class="download-btn">
+            Click here
+            </a>
+        </div>
+    </div>
+</section>
 
     <!-- Introduction Section -->
     <section class="intro-section">
@@ -1427,7 +1546,7 @@
     <!-- Themes Section -->
     <section id="themes">
         <h2>Grand Challenges</h2>
-        Click on a Grand Challenge to know more! 
+        <h4>Click on a Grand Challenge to know more! </h4>
         <div class="theme-grid">
             <div class="theme-box" onclick="window.open('theme1_page.html', '_blank')">
                 <h3>AI agents for collaborative content creation and knowledge curation</h3>
