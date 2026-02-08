@@ -579,81 +579,81 @@
             </div>
         </div>
     </div>
+<script>
+    // IMPORTANT: Replace this URL with your NEW Google Apps Script Web App URL
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxUPmYuS3W9nGIoADCeHEWqq77Ex2e8phIrp-TwjhcLb-BBm3SneYwFfBINYVZ8VLNltA/exec';
+    const THEME_NUMBER = '4'; // This is Theme 1
 
-    <script>
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby6GvLt6_yxys8n8oJFktTwpxTkYwI6413crfH4zwRv_srqJVgwC4c0CQTasXDUnYtM/exec';
-        const THEME_NUMBER = '4';
-
-        async function loadEnrolledTeams() {
-            try {
-                const response = await fetch(`${SCRIPT_URL}?theme=${THEME_NUMBER}`);
-                const data = await response.json();
-                
-                if (data.error) {
-                    displayError(data.error);
-                    return;
-                }
-                
-                displayTeams(data);
-            } catch (error) {
-                console.error('Error loading teams:', error);
-                displayError('Failed to load enrolled teams. Please try again later.');
+    async function loadEnrolledTeams() {
+        try {
+            const response = await fetch(`${SCRIPT_URL}?theme=${THEME_NUMBER}`);
+            const data = await response.json();
+            
+            if (data.error) {
+                displayError(data.error);
+                return;
             }
+            
+            displayTeams(data);
+        } catch (error) {
+            console.error('Error loading teams:', error);
+            displayError('Failed to load enrolled teams. Please try again later.');
         }
-
-function displayTeams(data) {
-    const countElement = document.getElementById('teamCount');
-    const containerElement = document.getElementById('teamsContainer');
-
-    // Separate individuals from teams
-    const individualTeam = data.teams.find(t => t.teamName === 'Individual Participants');
-    const regularTeams = data.teams.filter(t => t.teamName !== 'Individual Participants');
-
-    countElement.textContent = `${regularTeams.length} ${regularTeams.length === 1 ? 'Team' : 'Teams'} Enrolled`;
-
-    if (regularTeams.length === 0 && !individualTeam) {
-        containerElement.innerHTML = `<div class="no-teams">No teams enrolled yet.</div>`;
-        return;
     }
 
-    const teamsHTML = regularTeams.map(team => {
-        return `
-            <div class="team-card">
-                <h3>${team.teamName}</h3>
-                <ul class="member-list">
-                    ${team.members.map(m => `<li class="member-item">${m}</li>`).join('')}
-                </ul>
-            </div>
-        `;
-    }).join('');
+    function displayTeams(data) {
+        const countElement = document.getElementById('teamCount');
+        const containerElement = document.getElementById('teamsContainer');
 
-    const individualsHTML = individualTeam ? `
-        <div class="team-card">
-            <h3>Individual Participants</h3>
-            <ul class="member-list">
-                ${individualTeam.members.map(m => `<li class="member-item">${m}</li>`).join('')}
-            </ul>
-        </div>
-    ` : '';
+        // Separate individuals from teams
+        const individualTeam = data.teams.find(t => t.teamName === 'Individual Participants');
+        const regularTeams = data.teams.filter(t => t.teamName !== 'Individual Participants');
 
-    containerElement.innerHTML = `
-        <div class="teams-grid">
-            ${teamsHTML}
-            ${individualsHTML}
-        </div>
-    `;
-}
+        countElement.textContent = `${regularTeams.length} ${regularTeams.length === 1 ? 'Team' : 'Teams'} Enrolled`;
 
-
-
-        function displayError(message) {
-            const containerElement = document.getElementById('teamsContainer');
-            containerElement.innerHTML = `<div class="error-message">${message}</div>`;
+        if (regularTeams.length === 0 && !individualTeam) {
+            containerElement.innerHTML = `<div class="no-teams">No teams enrolled yet.</div>`;
+            return;
         }
 
-        loadEnrolledTeams();
-        setInterval(loadEnrolledTeams, 30000);
-    </script>
+        const teamsHTML = regularTeams.map(team => {
+            return `
+                <div class="team-card">
+                    <h3>${team.teamName}</h3>
+                    <ul class="member-list">
+                        ${team.members.map(m => `<li class="member-item">${m}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }).join('');
 
+        const individualsHTML = individualTeam ? `
+            <div class="team-card">
+                <h3>Individual Participants</h3>
+                <ul class="member-list">
+                    ${individualTeam.members.map(m => `<li class="member-item">${m}</li>`).join('')}
+                </ul>
+            </div>
+        ` : '';
+
+        containerElement.innerHTML = `
+            <div class="teams-grid">
+                ${teamsHTML}
+                ${individualsHTML}
+            </div>
+        `;
+    }
+
+    function displayError(message) {
+        const containerElement = document.getElementById('teamsContainer');
+        containerElement.innerHTML = `<div class="error-message">${message}</div>`;
+    }
+
+    // Load teams when page loads
+    loadEnrolledTeams();
+
+    // Refresh every 30 seconds to show new enrollments
+    setInterval(loadEnrolledTeams, 30000);
+</script>
 </body>
 </html>
